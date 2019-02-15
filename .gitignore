@@ -1,0 +1,7 @@
+node_modules/
+log/
+.bower_components
+.vscode/
+.nyc_output/
+.coverage/
+.DS_Store
