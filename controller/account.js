@@ -25,7 +25,7 @@ const login = (req, res) => {
                     response.sendsuccessData(res, 'login successfully', { token: token });
                 }
                 else
-                    response.sendSuccessMessage(res, 'Incorrect password');
+                    response.sendErrorCustomMessage(res, 'Incorrect password',500);
             }
         })
     });
