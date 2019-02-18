@@ -1,7 +1,34 @@
 const response = require('../utils/response');
 const userquery = require('../query/userquery')
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const login = (req, res) => {
+
+    var email = req.body.email;
+    var password = req.body.password;
+    userquery.getUserbyemail(email).then((info) => {
+        bcrypt.compare(password, info.password, (err, same) => {
+            if (err)
+                response.sendErrorMessage(res, err);
+            else {
+                if (same) {
+                    const token = jwt.sign(
+                        {
+                            email: info.email,
+                            userid: info._id
+                        },
+                        process.env.jwtsecretkey,
+                        {
+                            expiresIn: "1h"
+                        }
+                    )
+                    response.sendsuccessData(res, 'login successfully', { token: token });
+                }
+                else
+                    response.sendSuccessMessage(res, 'Incorrect password');
+            }
+        })
+    });
 
 }
 
@@ -18,13 +45,15 @@ const register = (req, res) => {
             })
         }
     });
-
-
 }
-
+const verifyJwt = (token) => {
+    const decodedval = jwt.verify(token, process.env.jwtsecretkey);
+    return decodedval;
+}
 
 
 module.exports = {
     login,
-    register
+    register,
+    verifyJwt
 }

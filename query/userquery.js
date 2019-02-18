@@ -19,7 +19,18 @@ const registerUser = (model) => {
 
     });
 }
+const getUserbyemail = (email) => {
+    return new Promise((resolve, reject) => {
+        userModel.findOne({ email: email }, (err, data) => {
+            if (err)
+                resolve(err);
+            else
+                resolve(data);
+        });
+    })
+}
 
 module.exports = {
-    registerUser
+    registerUser,
+    getUserbyemail
 }
