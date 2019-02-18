@@ -19,25 +19,18 @@ const registerUser = (model) => {
 
     });
 }
-const login = (email, password) => {
-    return new Promise((reject, resolve) => {
-        userModel.findOne({ email: email })
-            .exec()
-            .then((info) => {
-                bcrypt.compare(password, info.password, (err, data) => {
-                    if (err) {
-                        resolve(err)
-                    }
-                    else {
-                        resolve(info)
-                    }
-                })
-            });
-
-    });
+const getUserbyemail = (email) => {
+    return new Promise((resolve, reject) => {
+        userModel.findOne({ email: email }, (err, data) => {
+            if (err)
+                resolve(err);
+            else
+                resolve(data);
+        });
+    })
 }
 
 module.exports = {
     registerUser,
-    login
+    getUserbyemail
 }
