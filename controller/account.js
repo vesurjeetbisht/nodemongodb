@@ -1,8 +1,17 @@
 const response = require('../utils/response');
 const userquery = require('../query/userquery')
 const bcrypt = require('bcrypt');
-const login = (req, res) => {
+const jwt = require('jsonwebtoken');
 
+const login = (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    userquery.login(email, password, (info) => {
+      //  createJWTtoken({ email: info.email, userid: info._id }, (token) => {
+            return response.sendsuccessData(res, 'logged in successfully', {});
+       // })
+
+    })
 }
 
 const register = (req, res) => {
@@ -19,9 +28,18 @@ const register = (req, res) => {
         }
     });
 
+}
+const createJWTtoken = (payload) => {
+    return new promise((reject, resolve) => {
+        jwt.sign(payload,
+            process.env.jwtsecretKey,
+            {
+                expiresIn: "1hr"
+            }
+        )
+    })
 
 }
-
 
 
 module.exports = {
