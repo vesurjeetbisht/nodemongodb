@@ -18,6 +18,8 @@ app.use(bodyParser.json());
 
 app.use("", allRoutes);
 
+
+
 // CORS requests
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');

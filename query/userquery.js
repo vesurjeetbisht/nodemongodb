@@ -1,5 +1,5 @@
 const userModel = require('../model/user');
-
+const bcrypt = require('bcrypt');
 
 const registerUser = (model) => {
     return new Promise((resolve, reject) => {
