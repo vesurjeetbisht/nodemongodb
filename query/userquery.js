@@ -29,8 +29,28 @@ const getUserbyemail = (email) => {
         });
     })
 }
-
+const getUserInstructorsbyEmail = (email) => {
+    
+    return new Promise((resolve, reject) => {
+        userModel
+            .findOne({ email: email })
+            .select('instructors role')
+            .exec((err, info) => {
+                if (err)
+                    resolve(err)
+                else
+                    resolve(info)
+            })
+        // .then((info) => {
+        //     if (info)
+        //         resolve(info)
+        // }).catch(err => {
+        //     resolve(err)
+        // });
+    })
+}
 module.exports = {
     registerUser,
-    getUserbyemail
+    getUserbyemail,
+    getUserInstructorsbyEmail
 }

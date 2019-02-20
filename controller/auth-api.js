@@ -1,13 +1,12 @@
 const jwt = require('jsonwebtoken')
 
-
-module.exports.authapi = (req, res, callback) => {
+module.exports = (req, res, callback) => {
     try {
-        const decoded = jwt.verify(req.body.token, process.env.jwtsecretkey)
+        const decoded = jwt.verify(req.headers.authorization.replace('Bearer ',''), process.env.jwtsecretkey)
         req.userdata = decoded;
-        next();
+        callback();
     }
     catch (err) {
-        res.status(500).json({ message: "Auth failed" })
+        res.status(500).json({ message: err.message })
     }
 }
