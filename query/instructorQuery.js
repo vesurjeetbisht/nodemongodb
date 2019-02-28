@@ -10,7 +10,9 @@ const getInstructorByPostCode = (postcode, userinfo) => {
             criteria = {};
         let projection = {};
 
-        instructorModel.find(criteria, projection).populate('package')
+        instructorModel
+        .find(criteria, projection)
+        .populate('package')
         .exec((err, data) => {
 
             if (err) {
@@ -18,7 +20,7 @@ const getInstructorByPostCode = (postcode, userinfo) => {
             } else {
                 resolve(data);
             }
-        })
+        });
 
         instructorModel.find(criteria, projection, (err, data) => {
 
@@ -45,7 +47,7 @@ const getInstructorByID = (ID) => {
 }
 const addPackagesToUser = (userid, packages) => {
    return new Promise((resolve, reject) => {
-        instructorModel.updateOne({ _id: userid }, { packages: packages }, (err, info) => {
+        instructorModel.updateOne({ _id: userid }, { package: packages }, (err, info) => {
             if (err)
                 resolve(err);
             else

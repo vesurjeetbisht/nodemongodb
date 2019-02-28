@@ -12,9 +12,6 @@ const instructorlist = (req, res) => {
             response.sendsuccessData(res, 'instructor list', info);
         });
     })
-
-
-
 }
 const InstructorInfo = (req, res) => {
     var instructorID = req.query.id;
