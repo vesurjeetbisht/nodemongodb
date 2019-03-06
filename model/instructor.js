@@ -4,8 +4,12 @@ const schema = mongoose.Schema;
 const InstructorSchema = new schema(
     {
         instructor_name: { type: String },
+        instructor_email: { type: String },
+        instructor_password: { type: String },
+        instructor_description: { type: String },
+        instructor_city: { type: String },
         instructor_postcode: { type: String },
-        package: [{type: schema.Types.ObjectId, ref: 'package'}]
+        package: [{ type: schema.Types.ObjectId, ref: 'package' }]
     }
 )
 
