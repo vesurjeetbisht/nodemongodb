@@ -9,6 +9,7 @@ const InstructorSchema = new schema(
         instructor_description: { type: String },
         instructor_city: { type: String },
         instructor_postcode: { type: String },
+        active: { type: Boolean },
         package: [{ type: schema.Types.ObjectId, ref: 'package' }]
     }
 )
