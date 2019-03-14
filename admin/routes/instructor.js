@@ -6,4 +6,5 @@ router.post('/create', instructorController.createInstructor);
 router.get('/list', instructorController.instructorlist);
 router.post('/info', instructorController.getInstructorInfo);
 router.post('/delete', instructorController.deleteInstructor);
+router.post('/uploadimage', instructorController.uploaduserImage);
 module.exports = router

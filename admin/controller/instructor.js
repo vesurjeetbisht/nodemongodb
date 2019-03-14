@@ -1,4 +1,6 @@
 const instructorQuery = require('../query/instructor');
+const upload = require('../../utils/fileuploadservice');
+const singleUpload = upload.single('image')
 
 const createInstructor = (req, res) => {
     var model = req.body;
@@ -28,10 +30,20 @@ const deleteInstructor = (req, res) => {
         return res.status(500).json({ message: reject.message });
     });
 }
+const uploaduserImage = (req, res) => {
+    singleUpload(req, res, function (err, some) {
+        if (err) {
+            return res.status(422).send({ errors: [{ title: 'Image Upload Error', detail: err.message }] });
+        }
+
+        return res.json({ 'imageUrl': req.file.location });
+    });
+}
 
 module.exports = {
     createInstructor,
     instructorlist,
     getInstructorInfo,
-    deleteInstructor
+    deleteInstructor,
+    uploaduserImage
 }
